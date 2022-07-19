@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">                              	<!-- declara a configuração dos caracteres (não mudar) -->
+        <meta name="viewport" content="width=device-width">     <!-- configura o tamanho da página (não é indicado mudar) -->
+            <title>Web map de sidebar</title>                   <!-- título que aparecerá na aba e título do navegador -->
+
+        <!-- estilo css do leaflet (https://leafletjs.com/examples/quick-start/) -->
+        <link rel="stylesheet"
+              href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+              integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+              crossorigin=""/>
+        <!-- javascript do leaflet (https://leafletjs.com/examples/quick-start/) -->
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+                integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+                crossorigin=""></script>
+
+        <style>
+        body, html {    /* necessário para não ficar frestas entre os elementos e permitir q o mapa ocupe 100% do espaço */
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Sans-serif;
+    }
+
+        .sidenav { /* painel */
+          height: 100%;
+          width: 25%;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #efefef;
+          overflow-x: hidden;
+          color: #ccc;  /* adicionei */
+        }
+
+        #map {    /* página (direita) */
+          margin-left: 25%; /* distância em 25% */
+          width: 75%;  /* largura do mapa para completar os 100% (25% da distância à margem mais a largura do mapa) */
+          height: 100%;
+        }
+
+        /* adicionei (configuração das informações do painel) */
+        h1 {    
+            font-size: 30px;
+            color: #333333;
+            text-align: left;
+            padding: 20px;
+        }
+        p {
+            font-size: 14px;
+            color: #2e3c43;
+            text-align: justify;
+            padding: 20px;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div class="sidenav">
+          <h1>Título da informação</h1>
+          <p>Lorem ipsum dolor sit amet. Nisi dolorem id Quis aperiam et dolorum numquam. Et suscipit alias ab temporibus ipsa non quia Quis.
+          <br>
+          <br>Aut maiores tempore aut nemo ullam qui possimus soluta qui placeat aspernatur vel repellendus. Ex ipsam eligendi aut sunt exercitationem ut cumque galisum qui facilis eaque id adipisci porro.
+          <br>
+          <br>Rem ullam quia et perspiciatis itaque 33 repellat adipisci qui voluptatem reiciendis. Est facilis Quis id deserunt omnis a omnis laudantium eos repellat accusantium ex sunt officia. Et rerum tempora sit possimus omnis At aut nobis nisi in temporibus nihil ut sunt repellendus! Rem nobis tempore aut fugit harum qui voluptas nobis?
+          </p>
+        </div>
+
+        <div id="map"></div>
+
+    <script>
+        let map = L.map('map', {                // criar variável map
+            center: [-15.543458, -47.336698],   // coordenadas centrais que o mapa será carregado
+            zoom: 13,                           // zoom/escala que o mapa será carragado (0 = mundo)
+            minZoom: 7,                         // zoom/escala mínima possível, que corresponde ao enquadramento mínimo
+            maxZoom: 18,                         // zoom/escala máxima possível
+            zoomControl: false                   // retirar o botão de zoom (será colocado no lado direito (ver abaixo)
+            });
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {                                         // carrega base do mapa
+            attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',  // informação da fonte da base
+            }).addTo(map);                                                                                          // adicionar à variável map (criada acima)
+        L.control.zoom({ position: "topright" }).addTo(map);  // zoom no lado direito
+    </script>
+
+    </body>
+
+</html>
